@@ -1,30 +1,20 @@
 package personal.alex.workoutapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import personal.alex.workoutapp.adapters.RecyclerViewAdapter;
-import personal.alex.workoutapp.models.Routine;
-import personal.alex.workoutapp.viewmodels.MainActivityViewModel;
+import androidx.viewpager.widget.ViewPager;
+import personal.alex.workoutapp.adapters.SectionStatePagerAdapter;
+import personal.alex.workoutapp.fragments.ExistingRoutineFragment;
+import personal.alex.workoutapp.fragments.NewRoutineFragment;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Button;
-import android.widget.EditText;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private static String TAG = "MainActivity";
 
-    private RecyclerView mRecyclerView;
-    private RecyclerViewAdapter mAdapter;
-    private MainActivityViewModel mMainActivityViewModel;
+    private SectionStatePagerAdapter mSectionStatePagerAdapter;
+    private ViewPager mViewPager;
 
     //vars
     DatabaseHelper mDatabaseHelper;
@@ -36,29 +26,25 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate: Stated.");
 
-        mRecyclerView = findViewById(R.id.recycler_view);
+        mSectionStatePagerAdapter = new SectionStatePagerAdapter(getSupportFragmentManager());
 
-        mMainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
+        mViewPager = findViewById(R.id.container);
 
-        mMainActivityViewModel.init();
 
-        mMainActivityViewModel.getRoutines().observe(this, new Observer<List<Routine>>() {
-            @Override
-            public void onChanged(List<Routine> routines) {
-                mAdapter.notifyDataSetChanged();
-            }
-        });
 
-        initRecyclerView();
+        setupViewPager(mViewPager);
+    }
+
+    private void setupViewPager(ViewPager viewPager){
+        SectionStatePagerAdapter adapter = new SectionStatePagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new ExistingRoutineFragment(), "ExistingRoutineFragment");
+        adapter.addFragment(new NewRoutineFragment(), "NewRoutineFragment");
+        viewPager.setAdapter(adapter);
     }
 
 
-    private void initRecyclerView () {
-        Log.d(TAG, "initRecyclerView: init RecyclerView.");
-        mAdapter = new RecyclerViewAdapter(this, mMainActivityViewModel.getRoutines().getValue());
-        RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(linearLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
+    public void setViewPager (int fragmentNumber) {
+        mViewPager.setCurrentItem(fragmentNumber);
     }
 
 }

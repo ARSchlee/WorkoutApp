@@ -5,18 +5,34 @@
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/newExerciseToolbar"
+        android:id="@+id/addExerciseToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:navigationIcon="@mipmap/ic_launcher_round" />
+        app:navigationIcon="@mipmap/ic_launcher" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/addExName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Name:" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="149dp"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="241dp"
+        android:layout_height="wrap_content"
+        android:text="Repitition Or Interval" />
 </LinearLayout>
