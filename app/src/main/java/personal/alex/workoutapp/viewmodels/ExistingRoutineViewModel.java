@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel;
 import personal.alex.workoutapp.models.Routine;
 import personal.alex.workoutapp.repositories.RoutineRepository;
 
-public class MainActivityViewModel extends ViewModel {
+public class ExistingRoutineViewModel extends ViewModel {
 
     private MutableLiveData<List<Routine>> mRoutine;
     private RoutineRepository mRepo;
