@@ -3,8 +3,9 @@ package personal.alex.workoutapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 import personal.alex.workoutapp.adapters.SectionStatePagerAdapter;
+import personal.alex.workoutapp.fragments.AddExerciseFragment;
+import personal.alex.workoutapp.fragments.AddRoutineFragment;
 import personal.alex.workoutapp.fragments.ExistingRoutineFragment;
-import personal.alex.workoutapp.fragments.NewRoutineFragment;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -38,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager){
         SectionStatePagerAdapter adapter = new SectionStatePagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new ExistingRoutineFragment(), "ExistingRoutineFragment");
-        adapter.addFragment(new NewRoutineFragment(), "NewRoutineFragment");
+        adapter.addFragment(new AddRoutineFragment(), "AddRoutineFragment");
+        adapter.addFragment(new AddExerciseFragment(), "AddExerciseFragment");
         viewPager.setAdapter(adapter);
     }
 

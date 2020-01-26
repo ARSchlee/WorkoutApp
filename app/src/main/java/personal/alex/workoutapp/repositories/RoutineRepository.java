@@ -36,5 +36,7 @@ public class RoutineRepository {
         dataSet.add(new Routine("Shoulder Day"));
         dataSet.add(new Routine("Leg Day"));
         dataSet.add(new Routine("Arm Day"));
+        dataSet.add(new Routine("Circuit"));
+        dataSet.add(new Routine("Body Weight"));
     }
 }
