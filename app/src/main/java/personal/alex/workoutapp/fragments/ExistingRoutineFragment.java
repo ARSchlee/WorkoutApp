@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import personal.alex.workoutapp.MainActivity;
 import personal.alex.workoutapp.R;
 import personal.alex.workoutapp.adapters.RecyclerViewAdapter;
 import personal.alex.workoutapp.models.Routine;
@@ -26,6 +28,8 @@ public class ExistingRoutineFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerViewAdapter mAdapter;
     private ExistingRoutineViewModel mExistingRoutineViewModel;
+    private ImageButton addRoutine;
+
 
 
     @Nullable
@@ -33,22 +37,9 @@ public class ExistingRoutineFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.existing_routine_frag, container, false);
-/*        newExFab = view.findViewById(R.id.newRoutineFab);
-
-        newExFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "New Routine Frag", Toast.LENGTH_SHORT).show();
-                ((MainActivity)getActivity()).setViewPager(0);
-            }
-        });*/
-
         mRecyclerView = view.findViewById(R.id.recycler_view);
-
         mExistingRoutineViewModel = ViewModelProviders.of(getActivity()).get(ExistingRoutineViewModel.class);
-
         mExistingRoutineViewModel.init();
-
         mExistingRoutineViewModel.getRoutines().observe(this, new Observer<List<Routine>>() {
             @Override
             public void onChanged(List<Routine> routines) {
@@ -57,9 +48,21 @@ public class ExistingRoutineFragment extends Fragment {
         });
         initRecyclerView();
 
+        addRoutine = view.findViewById(R.id.backButton);
+
+        addRoutine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity)getActivity()).setViewPager(1);
+            }
+        });
+
 
         return view;
     }
+
+
+
 
     private void initRecyclerView () {
         Log.d(TAG, "initRecyclerView: init RecyclerView.");
